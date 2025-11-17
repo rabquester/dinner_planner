@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Dinner Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Weekly Dinner Planner</h1>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="planner">Weekly Planner</button>
+            <button class="tab-btn" data-tab="all-dinners">All Dinners</button>
+            <button class="tab-btn" data-tab="add-dinner">Add Dinner</button>
+        </div>
+        
+        <div id="planner" class="tab-content active">
+            <h2>Your Weekly Dinner Plan</h2>
+            <button id="generate-plan">Generate New Plan</button>
+            <div id="weekly-plan" class="dinner-grid">
+                <!-- Weekly plan will be populated here -->
+            </div>
+        </div>
+        
+        <div id="all-dinners" class="tab-content">
+            <h2>All Dinners</h2>
+            <div id="dinners-list" class="dinner-list">
+                <!-- All dinners will be populated here -->
+            </div>
+        </div>
+        
+        <div id="add-dinner" class="tab-content">
+            <h2 id="form-title">Add New Dinner</h2>
+            <form id="dinner-form">
+                <input type="hidden" id="dinner-id">
+                
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ingredients">Ingredients (one per line):</label>
+                    <textarea id="ingredients" rows="5" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recipe">Recipe:</label>
+                    <textarea id="recipe" rows="8" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit">Save</button>
+                    <button type="button" id="cancel-edit" style="display: none;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Dinner Detail Modal -->
+    <div id="dinner-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-dinner-name"></h2>
+            
+            <h3>Ingredients:</h3>
+            <ul id="modal-ingredients"></ul>
+            
+            <h3>Recipe:</h3>
+            <div id="modal-recipe"></div>
+            
+            <h3>Notes:</h3>
+            <div id="modal-notes"></div>
+            
+            <div class="modal-buttons">
+                <button id="edit-dinner">Edit</button>
+                <button id="delete-dinner">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
